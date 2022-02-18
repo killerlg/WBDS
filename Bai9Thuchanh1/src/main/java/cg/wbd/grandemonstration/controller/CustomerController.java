@@ -3,6 +3,7 @@ package cg.wbd.grandemonstration.controller;
 import cg.wbd.grandemonstration.model.Customer;
 import cg.wbd.grandemonstration.model.Province;
 import cg.wbd.grandemonstration.service.CustomerService;
+import cg.wbd.grandemonstration.service.DuplicateEmailException;
 import cg.wbd.grandemonstration.service.ProvinceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -49,7 +50,7 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ModelAndView updateCustomer(Customer customer) {
+    public ModelAndView updateCustomer(Customer customer) throws DuplicateEmailException {
         customerService.save(customer);
         return new ModelAndView("redirect:/customers");
     }

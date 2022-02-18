@@ -10,24 +10,15 @@ import java.util.Optional;
 public interface CustomerService {
     List<Customer> findAll();
 
-    Page<Customer> findAll(Pageable pageInfo) throws Exception{
-        if (true) throw new Exception("a dummy exception");
-    };
+    Page<Customer> findAll(Pageable pageInfo);
 
     List<Customer> search(String keyword);
 
     Page<Customer> search(String keyword, Pageable pageInfo);
 
-    @Override
-    public Optional<Customer> findOne(Long id) throws Exception {
-        Optional<Customer> customerOptional = customerRepository.findById(id);
-        if (!customerOptional.isPresent()) {
-            throw new Exception("customer not found!");
-        }
-        return customerOptional;
-    }
+    Optional<Customer> findOne(Long id);
 
-    Customer save(Customer customer);
+    Customer save(Customer customer) throws DuplicateEmailException;
 
     List<Customer> save(List<Customer> customers);
 
