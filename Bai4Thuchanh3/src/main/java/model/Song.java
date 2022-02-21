@@ -1,7 +1,13 @@
 package model;
 
+import javax.persistence.*;
+
+@Entity
+@Table
 public class Song {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String singer;
     private String type;
@@ -10,7 +16,7 @@ public class Song {
     public Song() {
     }
 
-    public Song(int id, String name, String singer, String type, String file) {
+    public Song(Long id, String name, String singer, String type, String file) {
         this.id = id;
         this.name = name;
         this.singer = singer;
@@ -18,11 +24,11 @@ public class Song {
         this.file = file;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

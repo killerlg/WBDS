@@ -3,7 +3,7 @@ package model;
 import org.springframework.web.multipart.MultipartFile;
 
 public class SongForm {
-    private int id;
+    private Long id;
     private String name;
     private String singer;
     private String type;
@@ -12,7 +12,7 @@ public class SongForm {
     public SongForm() {
     }
 
-    public SongForm(int id, String name, String singer, String type, MultipartFile file) {
+    public SongForm(Long id, String name, String singer, String type, MultipartFile file) {
         this.id = id;
         this.name = name;
         this.singer = singer;
@@ -20,11 +20,11 @@ public class SongForm {
         this.file = file;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

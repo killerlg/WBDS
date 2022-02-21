@@ -7,12 +7,24 @@ import java.util.List;
 public interface ISongService {
     List<Song> findAll();
 
-    void save(Song song);
+    Song findOne(Long id);
 
-    Song findById(int id);
+    Song save(Song song);
 
-    void update(int id, Song song);
+    List<Song> save(List<Song> songs);
 
-    void remove(int id);
+    boolean exists(Long id);
+
+    List<Song> findAll(List<Long> ids);
+
+    long count();
+
+    void delete(Long id);
+
+    void delete(Song song);
+
+    void delete(List<Song> songs);
+
+    void deleteAll();
 
 }
