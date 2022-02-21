@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head"></head>
+<body>
+<h3>Add Product</h3>
+<p>
+    <a th:href="@{/mail}">
+        Back to mail list
+    </a>
+</p>
+<div th:text="${message}" ></div>
+<div id="form">
+    <form th:action="@{/mail/save}" th:object="${mail}"
+          method="POST" novalidate="novalidate" enctype="multipart/form-data">
+        <div>
+            <label>Language</label>
+            <select type="text" th:field="*{language}">
+                <option th:each="langg : ${languages}"
+                        th:value="${langg}"
+                        th:text="${langg}">Wireframe
+                </option>
+            </select>
+        </div>
+        <div>
+            <label>Page Size</label>
+            <select type="text" th:field="*{pageSize}">
+                <option th:each="size : ${pagesize}"
+                        th:value="${size}"
+                        th:text="${size}">Wireframe
+                </option>
+            </select>
+        </div>
+        <div>
+            <label>Spam Filer</label>
+            <input type="checkbox" th:field="*{spamFilter}"/>
+        </div>
+        <div>
+            <label>Signature</label>
+            <textarea th:field="*{signature}"/>
+        </div>
+        <input type="submit" value="Save"/>
+    </form>
+</div>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>
