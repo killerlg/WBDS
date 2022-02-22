@@ -3,30 +3,41 @@
 <head th:replace="/layout :: head">
 </head>
 <body>
-<h3>Song Management</h3>
-<p>
-    <a th:href="@{/songs/create}">
-        Add new song
-    </a>
-</p>
-<table id = "songs">
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Singer</th>
-        <th>Type</th>
-        <th>Link</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="song : ${songs}">
-        <td th:text="${song.name}"></td>
-        <td th:text="${song.singer}"></td>
-        <td th:text="${song.type}"></td>
-        <td th:text="${song.file}"></td>
-    </tr>
-    </tbody>
-</table>
-<footer th:replace="/layout :: footer"></footer>
+<img id="img-of-the-day">
+<form th:action="@{/save}" th:object="${comment}" method="post">
+    <table>
+        <tr>
+            <td>Arthur:</td>
+            <td><input type="text" th:field="*{arthur}"/></td>
+        </tr>
+        <tr>
+            <td>Comment:</td>
+            <td><input type="text" th:field="*{comment}"/></td>
+        </tr>
+        <tr>
+            <td><input type="hidden" th:field="*{like}" th:value="0"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Add comment"></td>
+        </tr>
+    </table>
+</form>
+<div  th:each="comment : ${listcomments}">
+    <br/>
+    <div th:text="${comment.comment}"></div>
+</div>
+<script>
+    let query = 'https://api.nasa.gov/planetary/apod?api_key=7r5SsFncemKmh8uxco4OTUD7wZagxo1ZmVtPuob3';
+    let request = new XMLHttpRequest();
+    request.open('GET', query);
+    request.onload = function() {
+        if (request.status === 200) {
+            let response = JSON.parse(request.responseText);
+            document.getElementById('img-of-the-day').setAttribute('src', response.url);
+        }
+    };
+    request.send();
+</script><footer th:replace="/layout :: footer"></footer>
 </body>
 </html>
