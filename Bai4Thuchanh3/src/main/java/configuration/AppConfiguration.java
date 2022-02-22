@@ -1,7 +1,6 @@
 package configuration;
 
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
@@ -22,10 +21,10 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
-import repository.CommentRepository;
-import repository.ICommentRepository;
-import service.CommentService;
-import service.ICommentService;
+import repository.BlogRepository;
+import repository.IBlogRepository;
+import service.BlogService;
+import service.IBlogService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -113,15 +112,24 @@ public class AppConfiguration extends WebMvcConfigurerAdapter implements Applica
         return properties;
     }
 
+//    @Bean
+//    public ICommentRepository customerRepository() {
+//        return new CommentRepository();
+//    }
+//
+//    @Bean
+//    public ICommentService customerService() {
+//        return new CommentService();
+//    }
+
     @Bean
-    public ICommentRepository customerRepository() {
-        return new CommentRepository();
+    public IBlogRepository blogRepository() {
+        return new BlogRepository();
     }
 
     @Bean
-    public ICommentService customerService() {
-        return new CommentService();
+    public IBlogService blogService() {
+        return new BlogService();
     }
-
 
 }

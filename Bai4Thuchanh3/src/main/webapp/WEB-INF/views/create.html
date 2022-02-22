@@ -2,33 +2,25 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/layout :: head"></head>
 <body>
-<h3>Add Product</h3>
+<h3>Add Blog</h3>
 <p>
-    <a th:href="@{/songs}">
-        Back to song list
+    <a th:href="@{/}">
+        Back to blog list
     </a>
 </p>
-<div th:text="${message}" ></div>
+<div th:text="${message}"></div>
 <div id="form">
-    <form th:action="@{/songs/save}" th:object="${songForm}"
-          method="POST" novalidate="novalidate" enctype="multipart/form-data">
-        <input type="hidden" th:field="*{id}"/>
+    <form th:action="@{/save}" th:object="${blog}"
+          method="POST">
         <div>
-            <label>Name</label>
-            <input type="text" th:field="*{name}"/>
+            <label>Tittle</label>
+            <input type="text" th:field="*{title}"/>
         </div>
         <div>
-            <label>Singer</label>
-            <input type="text" th:field="*{singer}"/>
+            <label>Content</label>
+            <input type="text" th:field="*{content}"/>
         </div>
-        <div>
-            <label>Type</label>
-            <input type="text" th:field="*{type}"/>
-        </div>
-        <div>
-            <label>File</label>
-            <input type="file" th:field="*{file}"/>
-        </div>
+
         <input type="submit" value="Save"/>
     </form>
 </div>
