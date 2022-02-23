@@ -6,12 +6,21 @@
 <a th:href="@{/create}">
     Add Blog
 </a>
+<a th:href="@{/categories}">
+    View Category
+</a>
 <div th:text="${message}"></div>
 <h1>Blogs</h1>
+<form>
+    Search:
+    <input name="search" type="text"/>
+    <input type="submit" value="Search"/>
+</form>
 <table border="1">
     <tr>
         <th>Tittle</th>
         <th>Content</th>
+        <th>Category</th>
         <th>Edit</th>
         <th>Delete</th>
     </tr>
@@ -19,10 +28,18 @@
         <tr>
             <td th:text="${blog.title}"></td>
             <td th:text="${blog.content}"></td>
+            <td th:if="${blog.category}" th:text="${blog.category.name}"></td>
+            <td th:unless="${blog.category}"></td>
             <td><a th:href="@{/edit/__${blog.id}__ }">Edit</a></td>
             <td><a th:href="@{/delete/__${blog.id}__ }">Delete</a></td>
         </tr>
     </th:block>
+    </table>
+<div>
+    <a th:href="@{'/'(page=${listblogs.number - 1})}" th:if="${listblogs.hasPrevious()}">Previous</a>
+    <span th:text="${listblogs.number + 1}"></span>/<span th:text="${listblogs.totalPages}"></span>
+    <a th:href="@{'/'(page=${listblogs.number + 1})}" th:if="${listblogs.hasNext()}">Next</a>
+</div>
 <footer th:replace="/layout :: footer"></footer>
 </body>
 </html>
