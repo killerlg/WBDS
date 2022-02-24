@@ -21,8 +21,8 @@ public class CategoryService implements ICategoryService{
     }
 
     @Override
-    public void save(Category category) {
-        categoryRepository.save(category);
+    public Category save(Category category) {
+        return  categoryRepository.save(category);
     }
 
     @Override

@@ -88,7 +88,7 @@ public class CategoryController {
         return "redirect:categories";
     }
 
-    @GetMapping("/view-province/{id}")
+    @GetMapping("/view-category/{id}")
     public ModelAndView viewProvince(@PathVariable("id") Long id){
         Optional<Category> categoryOptional = categoryService.findById(id);
         if(!categoryOptional.isPresent()){
