@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List</title>
+</head>
+<body>
+<a th:href="@{create}">Create</a>
+
+<div th:if="${message}">
+    <span th:text="${message}"> </span>
+</div>
+
+<table>
+    <tr>
+        <td>#</td>
+        <td>Fist Name</td>
+        <td>Last Name</td>
+        <td>Number</td>
+        <td>Age</td>
+        <td>Email</td>
+        <td>Edit</td>
+        <td>Delete</td>
+    </tr>
+    <tr th:each="row : ${user}">
+        <td th:text="${row.getId()}"></td>
+        <td th:text="${row.getFirstname()}"></td>
+        <td th:text="${row.getLastname()}"></td>
+        <td th:text="${row.getNumber()}"></td>
+        <td th:text="${row.getAge()}"></td>
+        <td th:text="${row.getEmail()}"></td>
+        <td><a th:href="@{/user/{id}/edit(id=${row.getId()})}">Edit</a></td>
+        <td><a th:href="@{/user/{id}/delete(id=${row.getId()})}">Delete</a></td>
+    </tr>
+</table>
+</body>
+</html>
