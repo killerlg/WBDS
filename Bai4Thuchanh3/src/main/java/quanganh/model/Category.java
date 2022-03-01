@@ -12,7 +12,7 @@ public class Category {
 
     private String name;
 
-    @OneToMany(targetEntity = Blog.class,fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "category")
     private List<Blog> blogs;
 
 

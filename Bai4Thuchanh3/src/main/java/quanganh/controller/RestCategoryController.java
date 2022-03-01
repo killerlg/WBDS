@@ -4,11 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import quanganh.model.BlogDTO;
 import quanganh.model.Category;
+import quanganh.model.CategoryDTO;
 import quanganh.service.ICategoryService;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/categories")
@@ -16,11 +19,16 @@ public class RestCategoryController {
     @Autowired
     private ICategoryService categoryService;
     @GetMapping
-    public ResponseEntity<Iterable<Category>> findAllCategories() {
-        List<Category> listCategories = (List<Category>)categoryService.findAll();
-        if (listCategories.isEmpty()) {
+    public ResponseEntity<Iterable<CategoryDTO>> findAllCategories() {
+        List<Category> categories = (List<Category>)categoryService.findAll();
+        List<CategoryDTO> categoriesDTO = categories.stream().map(
+                e -> new CategoryDTO(e.getId(),e.getName(),e.getBlogs().stream().map(
+                        m -> new BlogDTO(m.getId(),m.getTitle())
+                ).collect(Collectors.toList()))
+        ).collect(Collectors.toList());
+        if (categories.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } return new ResponseEntity<>(listCategories, HttpStatus.OK);
+        } return new ResponseEntity<>(categoriesDTO, HttpStatus.OK);
 
     }
     @GetMapping("/{id}")

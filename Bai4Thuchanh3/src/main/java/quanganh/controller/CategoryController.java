@@ -1,6 +1,7 @@
 package quanganh.controller;
 
 import quanganh.model.Blog;
+import quanganh.model.BlogDTO;
 import quanganh.model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -10,10 +11,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import quanganh.model.CategoryDTO;
 import quanganh.service.IBlogService;
 import quanganh.service.ICategoryService;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 public class CategoryController {
@@ -23,7 +27,9 @@ public class CategoryController {
     private IBlogService blogService;
     @GetMapping("/categories")
     public ModelAndView categories(Pageable pageable) {
-        Iterable<Category> categories = categoryService.findAll();
+        List<Category> categories = (List<Category>) categoryService.findAll();
+
+
         ModelAndView modelAndView = new ModelAndView("/categories/list");
         modelAndView.addObject("categories", categories);
         return modelAndView;
